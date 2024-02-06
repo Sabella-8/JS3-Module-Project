@@ -1,18 +1,29 @@
 #root {
-  color: red;
+  color: rgb(38, 32, 32);
+   display: grid;
+  grid-template-columns: auto auto auto; 
+  gap: 15px;
+  border: none;
+  background-color: rgb(249, 239, 226);
 }
 body {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  gap: 15px;
   background-color: rgb(249, 239, 226);
+}
+.episodes-amount{
+  color: rgb(116, 30, 30);
+  font-weight: bolder;
+  font-size: 1.3rem;
 }
 div {
   border: 1px solid black;
   border-top-right-radius: 11px;
   border-top-left-radius: 11px;
   margin: 5px;
-  background-color: rgb(243, 248, 253);
+  background-color: rgb(221, 225, 229);
+}
+input{
+  padding: 15px 20px;
+  border: 1px solid black;
 }
 h1 {
   border: 1px solid black;
