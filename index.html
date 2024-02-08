@@ -9,23 +9,12 @@
   </head>
 
   <body>
-  <label>
-      <input type="search" id="input" name="q" placeholder="Search term" /> 🔍
-    </label>
-    <div class="episodes-amount"></div>
-    <div id="root"></div>
-    <div class="episode-card">
-    <template >
-        <h1>Name</h1>
-        <img />
-        <p>Summary</p>
-      </div>
-    </template>
+    <input type="search" id="search-bar" name="q" placeholder="🔍Search term" />
+    Episodes Match,<span id="num-epis"></span>
 
-    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
+    <div id="root"></div>
     <script src="episodes.js"></script>
 
-    <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
   </body>
 </html>

@@ -9,11 +9,7 @@
 body {
   background-color: rgb(249, 239, 226);
 }
-.episodes-amount {
-  color: rgb(116, 30, 30);
-  font-weight: bolder;
-  font-size: 1.3rem;
-}
+
 div {
   border: 1px solid black;
   border-top-right-radius: 11px;
@@ -22,8 +18,11 @@ div {
   background-color: rgb(221, 225, 229);
 }
 input {
+  margin-left: 40%;
+  margin-bottom: 20px;
   padding: 15px 20px;
-  border: 1px solid black;
+  border: 1px solid rgb(183, 101, 101);
+  border-radius: 10px;
 }
 h1 {
   border: 1px solid black;
@@ -37,7 +36,8 @@ img {
   margin-left: auto;
   margin-right: auto;
 }
-p {
+p,
+span {
   margin: 5px;
   padding: 5px;
 }
