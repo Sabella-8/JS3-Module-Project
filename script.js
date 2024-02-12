@@ -1,3 +1,25 @@
+const state = {
+  getAllEpisodes: [],
+  searchTerm: "",
+};
+
+function fetchfilms() {
+  return fetch("https://api.tvmaze.com/shows/82/episodes")
+    .then((res) => res.json())
+    .then((data) => {
+      return data;
+    });
+}
+fetchfilms()
+  .then(function (films) {
+    if (films) {
+      state.getAllEpisodes = films;
+    }
+  })
+  .catch((err) => {
+    return "Error occurred";
+  });
+
 function setup() {
   const allEpisodes = state.getAllEpisodes;
   makePageForEpisodes(allEpisodes);
