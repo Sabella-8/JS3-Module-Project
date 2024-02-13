@@ -1,13 +1,14 @@
 #root {
   color: rgb(38, 32, 32);
-   display: grid;
+   /* display: grid;
   grid-template-columns: auto auto auto; 
-  gap: 15px;
+  gap: 15px; */
   border: none;
   background-color: rgb(249, 239, 226);
 }
 body {
   background-color: rgb(249, 239, 226);
+  
 }
 .episodes-amount{
   color: rgb(116, 30, 30);

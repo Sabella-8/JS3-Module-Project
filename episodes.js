@@ -31,8 +31,10 @@ function getOneEpisode() {
   };
 }
 
-function getAllEpisodes() {
-  return [
+// function getAllEpisodes() {
+//   return [
+  const data = {
+    getAllEpisodes : [
     {
       id: 4952,
       url:
@@ -1851,5 +1853,6 @@ function getAllEpisodes() {
         },
       },
     },
-  ];
-}
+  ],
+    searchTerm : "",
+};
