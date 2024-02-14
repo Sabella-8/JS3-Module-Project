@@ -3,29 +3,32 @@ const state = {
   searchTerm: "",
 };
 
-function fetchfilms() {
+function fetchFilms() {
   return fetch("https://api.tvmaze.com/shows/82/episodes")
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Failed to fetch episodes");
+      }
+      return res.json();
+    })
     .then((data) => {
       return data;
+    })
+    .catch((err) => {
+      console.error(err);
+      return [];
     });
 }
-fetchfilms()
-  .then(function (films) {
-    if (films) {
-      state.getAllEpisodes = films;
-    }
-  })
-  .catch((err) => {
-    return "Error occurred";
-  });
 
 function setup() {
-  const allEpisodes = state.getAllEpisodes;
-  makePageForEpisodes(allEpisodes);
-  const numb = document.getElementById("num-epis");
-  numb.textContent = ` ${allEpisodes.length} `;
-  render();
+  fetchFilms().then(function (films) {
+    state.getAllEpisodes = films;
+    const allEpisodes = state.getAllEpisodes;
+    makePageForEpisodes(allEpisodes);
+    const numb = document.getElementById("num-epis");
+    numb.textContent = ` ${allEpisodes.length} `;
+    render();
+  });
 }
 
 function makePageForEpisodes(episodeList) {
