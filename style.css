@@ -6,6 +6,7 @@
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 25px;
 }
+
 body {
   background-color: rgb(249, 239, 226);
 }

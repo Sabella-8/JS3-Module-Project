@@ -22,8 +22,7 @@ const state = {
       });
   }
 
-
-  function fetchShows() {
+function fetchShows() {
     return fetch("https://api.tvmaze.com/shows")
       .then((res) => {
         if (!res.ok) {
