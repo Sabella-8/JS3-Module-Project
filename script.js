@@ -3,15 +3,16 @@ const state = {
   searchTerm: "",
 };
 
-function fetchFilms() {
-  return fetch("https://api.tvmaze.com/shows/82/episodes")
+function fetchShows() {
+  return fetch("https://api.tvmaze.com/shows")
     .then((res) => {
       if (!res.ok) {
-        throw new Error("Failed to fetch episodes");
+        throw new Error("Failed to fetch shows");
       }
       return res.json();
     })
     .then((data) => {
+      console.log(data);
       return data;
     })
     .catch((err) => {
@@ -21,8 +22,30 @@ function fetchFilms() {
 }
 
 function setup() {
-  fetchFilms().then(function (films) {
-    state.getAllEpisodes = films;
+  fetchShows().then(function (shows) {
+    const showSelection = document.getElementById("showSelection");
+
+    shows.forEach((show) => {
+      const option = document.createElement("option");
+      option.value = show.id;
+      option.textContent = show.name;
+      showSelection.appendChild(option);
+    });
+
+    showSelection.addEventListener("change", function (event) {
+      const selectedShowName = event.target.value;
+      const selectedShow = shows.find((show) => show.name === selectedShowName);
+      fetch(`https://api.tvmaze.com/shows/${selectedShow.id}`)
+        .then((res) => res.json())
+        .then((selectedShow) => {
+          makePageForEpisodes(selectedShow.episodes);
+        })
+        .catch((error) =>
+          console.error("Error fetching selected show:", error)
+        );
+    });
+
+    state.getAllEpisodes = shows;
     const allEpisodes = state.getAllEpisodes;
     makePageForEpisodes(allEpisodes);
     const numb = document.getElementById("num-epis");
