@@ -18,6 +18,7 @@ function fetchFilms() {
     .catch((err) => {
       console.error(err);
       return [];
+
     });
 }
 
@@ -35,6 +36,7 @@ function fetchShows() {
     .catch((err) => {
       console.error(err);
       return [];
+
     });
 }
 
@@ -43,6 +45,7 @@ function setup() {
     state.getAllEpisodes = films;
     const allEpisodes = state.getAllEpisodes;
     makePageForEpisodes(allEpisodes);
+
     fetchShows().then(function (shows) {
       state.getAllShows = shows;
       createShowDropdownOptions(shows);
@@ -51,6 +54,8 @@ function setup() {
       numb.textContent = `${allEpisodes.length}`;
       render();
     });
+
+   
   });
 }
 
