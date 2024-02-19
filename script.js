@@ -4,22 +4,20 @@ const state = {
   searchTerm: "",
 };
 
-function fetchShows() {
-  return fetch("https://api.tvmaze.com/shows")
+function fetchFilms() {
+  return fetch("https://api.tvmaze.com/shows/82/episodes")
     .then((res) => {
       if (!res.ok) {
-        throw new Error("Failed to fetch shows");
+        throw new Error("Failed to fetch episodes");
       }
       return res.json();
     })
     .then((data) => {
-      console.log(data);
       return data;
     })
     .catch((err) => {
       console.error(err);
       return [];
-
     });
 }
 
@@ -37,48 +35,22 @@ function fetchShows() {
     .catch((err) => {
       console.error(err);
       return [];
-
     });
 }
 
 function setup() {
-  fetchShows().then(function (shows) {
-    const showSelection = document.getElementById("showSelection");
-
-    shows.forEach((show) => {
-      const option = document.createElement("option");
-      option.value = show.id;
-      option.textContent = show.name;
-      showSelection.appendChild(option);
-    });
-
-    showSelection.addEventListener("change", function (event) {
-      const selectedShowName = event.target.value;
-      const selectedShow = shows.find((show) => show.name === selectedShowName);
-      fetch(`https://api.tvmaze.com/shows/${selectedShow.id}`)
-        .then((res) => res.json())
-        .then((selectedShow) => {
-          makePageForEpisodes(selectedShow.episodes);
-        })
-        .catch((error) =>
-          console.error("Error fetching selected show:", error)
-        );
-    });
-
-    state.getAllEpisodes = shows;
+  fetchFilms().then(function (films) {
+    state.getAllEpisodes = films;
     const allEpisodes = state.getAllEpisodes;
     makePageForEpisodes(allEpisodes);
 
     fetchShows().then(function (shows) {
       state.getAllShows = shows;
       createShowDropdownOptions(shows);
-
       const numb = document.getElementById("num-epis");
       numb.textContent = `${allEpisodes.length}`;
       render();
     });
-
-   
   });
 }
 
@@ -105,7 +77,6 @@ function makePageForEpisodes(episodeList) {
   });
   episodeTitle();
 }
-
 const selectEpisodes = document.getElementById("select-episode");
 const episodeTitle = () => {
   selectEpisodes.innerHTML = "";
@@ -116,15 +87,14 @@ const episodeTitle = () => {
     selectEpisodes.appendChild(option);
   });
 
-  //Cut this code from this line to 109, and create a new function and call the function here
   let episodeContainers = [...document.querySelectorAll(".episode-card")];
   selectEpisodes.addEventListener("change", function () {
     const selectedValue = selectEpisodes.value;
     episodeContainers.forEach((content) => {
       if (content.innerHTML.includes(selectedValue)) {
-        content.style.display = "block"; //show
+        content.style.display = "block";
       } else {
-        content.style.display = "none"; //hide
+        content.style.display = "none";
       }
     });
   });
@@ -145,38 +115,32 @@ function render() {
     makePageForEpisodes(filteredEpisodes);
   });
 }
-
 const selectShows = document.getElementById("select-show");
 function createShowDropdownOptions(shows) {
   selectShows.innerHTML = "";
-
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
   defaultOption.innerHTML = "Select show";
   selectShows.appendChild(defaultOption);
 
-  //short show Alphabetically
-  shows.sort((a, b) => a.name.localeCompare(b.name, { sensitivity: "base" })); // localeCompare is a method which compare name with (a, b). sensitivity: 'base' mean case sensitive and not influenced by case variations mean like 'é' and 'e' .
-
+  shows.sort((a, b) => a.name.localeCompare(b.name, { sensitivity: "base" }));
   shows.forEach((show) => {
     const option = document.createElement("option");
-    option.value = show.id; // we use show.id as a identifier like "123, game, show123, 8400-e29b-41d4-a716-446, ABC_XYZ_123"
+    option.value = show.id;
     option.textContent = show.name;
     selectShows.appendChild(option);
   });
-
   selectShows.addEventListener("change", function () {
     const selectedShowId = selectShows.value;
     console.log("here");
     showEpisodesForSelectedShow(selectedShowId);
   });
 }
-
 function showEpisodesForSelectedShow(showId) {
   if (showId === "") {
     makePageForEpisodes(state.getAllEpisodes);
   } else {
-    fetch(`https://api.tvmaze.com/shows/${showId}/episodes`) // we use here in URL "{showId} = 123 "to allow user to add there show number in link "https://api.tvmaze.com/shows/123/episodes"
+    fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch episodes for the selected show");
@@ -191,7 +155,6 @@ function showEpisodesForSelectedShow(showId) {
       });
   }
 }
-
 function showMovieCard(selectedValue) {
   const allEpisodes = state.getAllEpisodes;
   const selectedEpisode = allEpisodes.find((episode) => {
@@ -201,8 +164,7 @@ function showMovieCard(selectedValue) {
       ).padStart(2, 0)}` === selectedValue
     );
   });
-  // Display the corresponding movie card
+
   makePageForEpisodes([selectedEpisode]);
 }
-
 window.onload = setup;
