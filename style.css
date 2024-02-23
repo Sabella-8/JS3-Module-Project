@@ -1,85 +1,47 @@
-#root {
-  color: rgb(38, 32, 32);
-  border: none;
-  background-color: rgb(249, 239, 226);
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 25px;
-}
-
-body {
-  background-color: rgb(249, 239, 226);
-}
-
 header {
-  background-color: #3b3a3a;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-  border-radius: 20px;
-  margin-bottom: 15px;
+  padding: 30px;
+  background-color: antiquewhite;
 }
-
-h1 {
-  margin-bottom: 10px;
-}
-
-a {
-  color: #a10f0f;
-  text-decoration: none;
-}
-
-#search-bar {
-  padding: 10px;
-  margin: 10px;
-  border: 3px solid #fff;
-  border-radius: 5px;
-}
-
-.form-group {
-  margin: 10px;
-  display: inline-block;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  color: rgb(255, 255, 255);
-  font-size: 20px;
-}
-
-select {
-  padding: 8px;
-  border: 1px solid #fff;
-  border-radius: 5px;
-}
-
-div {
-  border-radius: 20px;
-  margin: 5px;
-  background-color: rgb(220, 215, 215);
-}
+select,
+button,
 input {
-  margin-left: 40%;
-  margin-bottom: 20px;
-  padding: 15px 20px;
-  border: 1px solid rgb(183, 101, 101);
-  border-radius: 10px;
+  margin: 2%;
+  padding: 8px;
+  border-radius: 6px;
+}
+#root {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 20px;
+}
+
+#container {
+  border: 2px solid #c3bdbdca;
+  border-radius: 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#conta {
+  display: flex;
+  margin-top: 30px;
+  padding: 10px;
+  border: 2px solid #c3bdbdca;
 }
 h2 {
-  background-color: #f1e8e8;
+  background-color: #c3bdbd;
   text-align: center;
   border-radius: 10px;
   padding: 20px;
   margin-top: 0;
+  cursor: pointer;
 }
 img {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-p,
-span {
+p {
   margin: 5px;
   padding: 5px;
 }
